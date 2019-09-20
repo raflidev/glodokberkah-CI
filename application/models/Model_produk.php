@@ -3,24 +3,32 @@ class Model_produk extends CI_Model{
     function __construct()
     {
         parent::__construct();
+        $this->load->database();
     }
 
 
     function idUser()
     {
-        $this->db->select_max('id_user');
+        $this->db->select('right(user.id_user,2) as id_user', FALSE);
+        $this->db->order_by('id_user','DESC');
+        $this->db->limit(1);
         $this->db->from('user');
-        $kode = $this->db->get();
-        $kode->result_array();
+        $queryuser = $this->db->get();
+        
+        if($queryuser->num_rows() <> 0)
+        {
+            //cek code
+            $data = $queryuser->row();
+            $kode = intval($data->id_user) + 1;    
+        }
+        else
+        {
+            $kode =1;
+        }
 
-        $noUrut = (int) substr($kode, 1, 4);
-
-        $noUrut++;
-
-        $char = "U";
-        $idUser = $char . sprintf("%04s", $noUrut);
- 
-        return $idUser;
+        $batas = str_pad($kode,4,"0", STR_PAD_LEFT);
+        $kodetampil = "U".$batas;
+        return $kodetampil;
     }
 
     function tampilProduk()
@@ -33,8 +41,7 @@ class Model_produk extends CI_Model{
     }
 
     function login($username, $password)
-    {
-        $this->load->database();
+    { 
         $this->db->select('*');
         $this->db->from('admin');
         $this->db->where('username',$username);
@@ -46,6 +53,24 @@ class Model_produk extends CI_Model{
             return $query->result();
         }else{
             return false;
+        }
+    }
+
+    function register($kode,$user,$pass,$pass2)
+    {
+        if($pass == $pass2){
+            
+            $data= array(
+                'id_user' => $kode,
+                'username' => $user,
+                'password' => $pass2,
+                'status_user' => '2'
+            );
+            
+            $this->db->insert('user', $data);
+
+        }else{
+            echo 'tidak';
         }
     }
 }

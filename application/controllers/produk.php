@@ -15,6 +15,7 @@ class produk extends CI_Controller {
         $heading = 'Etalase';
         $konten = $this->Model_produk->tampilProduk();
 
+
         $menu = array(
                 'Etalase' => 'grid',
                 'Sedang Populer' => 'trending-up',
