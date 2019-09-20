@@ -1,3 +1,3 @@
 # glodokberkah-CI
-##Coming soon
+## Coming soon
 review will be release after finish this project.
