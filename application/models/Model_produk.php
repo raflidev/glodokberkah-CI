@@ -43,18 +43,28 @@ class Model_produk extends CI_Model{
     function login($username, $password)
     { 
         $this->db->select('*');
-        $this->db->from('admin');
+        $this->db->from('user');
         $this->db->where('username',$username);
-        $this->db->where('password',$password);
-        $this->db->limit(1);
-
         $query = $this->db->get();
-        if($query->num_rows() == 1){
-            return $query->result();
+        if ($query->num_rows() === 1)
+         {
+            $row = $query->row_array();
+            if(password_verify($password,$row['password']))
+            {
+                $sess_array = array(
+                    'USER' => $row['username'],
+                    'LEVEL' => $row['status_user'],
+                    'login_status' => 'true',
+                );
+                $this->session->set_userdata($sess_array);
+                redirect('dashboard','refresh');
         }else{
-            return false;
-        }
-    }
+            redirect('login?m=false','refresh');
+        } 
+    }else{
+        redirect('login?m=false','refresh');
+    } 
+}
 
     function register($kode,$user,$pass,$pass2)
     {
@@ -63,7 +73,7 @@ class Model_produk extends CI_Model{
             $data= array(
                 'id_user' => $kode,
                 'username' => $user,
-                'password' => $pass2,
+                'password' => password_hash($pass2,PASSWORD_DEFAULT),
                 'status_user' => '2'
             );
             

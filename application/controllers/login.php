@@ -6,10 +6,6 @@ class login extends CI_Controller {
     public function index()
     {
         $heading = 'Login page';
-
-        $cek =  $this->model_produk->idUser();
-        
-
     if($this->session->userdata('login_status'))
     {
         redirect('dashboard');
@@ -28,20 +24,7 @@ class login extends CI_Controller {
         $pass = $this->input->post('password');
         $this->load->model('Model_produk');
         $result = $this->Model_produk->login($user,$pass);
-        if($result){
-            $sess_array = array();
-            foreach ($result as $row) {
-                $sess_array = array(
-                    'USER' => $row->username,
-                    'NAME' => $row->namaAdmin,
-                    'LEVEL' => $row->levelAdmin,
-                    'login_status' => true,
-                );
-                $this->session->set_userdata($sess_array);
-                redirect('dashboard','refresh');
-            }
-            return TRUE;
-        }else{
+        if($result == false){
             $this->session->set_flashdata('notif','Maaf, username atau password anda salah');
         }
     }
