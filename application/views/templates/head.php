@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <script src="https://unpkg.com/feather-icons"></script>
     <link rel="stylesheet" href="assets/css/sidebar.css">
-    <title>Mamang Store</title>
+    <title>GlodokBerkah</title>
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;

@@ -7,10 +7,17 @@ class profile extends CI_Controller {
         parent::__construct();
         $this->load->database();
         $this->load->model('Model_produk');
+        $info = $this->load->model('Model_profile');
     }
     
     public function index()
     {
-        
+        $heading = "Profiles";
+        $this->load->view('profile/index',compact('heading'));
+    }
+
+    public function data()
+    {
+        $this->load->view('profile/data');
     }
 }

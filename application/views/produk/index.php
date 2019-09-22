@@ -29,7 +29,7 @@
                 <h5 class="card-title"><?= $row['nama_barang'] ?></h5>
                 <button type="button" class="float-right btn btn-secondary btn-sm mb-1 p-1" disabled><?= $row['kategori'] ?></button>
                 <p class='text-danger'>IDR <?= number_format($row['harga_jual']) ?></p>
-                <a href="#" class="btn btn-block  btn-secondary">Buy Now! 
+                <a href="" class="btn btn-block  btn-primary">Buy Now! 
                   <span data-feather="shopping-cart"></span></a>
                 </div>
               </div>

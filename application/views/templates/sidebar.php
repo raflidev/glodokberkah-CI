@@ -5,20 +5,20 @@
     <nav class="col-md-2 d-none d-md-block bg-light sidebar">
       <div class="sidebar-sticky">
         <ul class="nav flex-column">
-          
-          <?php
+
+            <?php
           foreach ($menu as $m => $icon) { ?>
           <li class="nav-item">
             <?php if($heading == $m){ 
              echo '<a class="nav-link active" href="#">';
-             } else { 
-           echo '<a class="nav-link " href="#">';
-            } ?>
+            } else { 
+           echo "<a class='nav-link' href='#'>";
+          } ?>
               <span data-feather="<?= $icon ?>"></span>
               <?= $m ?> <span class="sr-only">(current)</span>
             </a>
           </li>
-        <?php } ?>
+          <?php } ?>
           <!-- <li class="nav-item">
             <a class="nav-link active" href="#">
               <span data-feather="file"></span>
@@ -37,7 +37,11 @@
           <?php
           foreach ($kategori as $k => $icon) { ?>
           <li class="nav-item">
-            <a class="nav-link " href="#">
+          <?php if($heading == $k){ 
+             echo "<a class='nav-link active' href='#'>";
+            } else { ?>
+            <a class="nav-link" href='#'>
+            <?php } ?>
               <span data-feather="<?= $icon ?>"></span>
               <?= $k ?> <span class="sr-only">(current)</span>
             </a>

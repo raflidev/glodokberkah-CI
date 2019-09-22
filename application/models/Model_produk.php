@@ -6,7 +6,25 @@ class Model_produk extends CI_Model{
         $this->load->database();
     }
 
+    function menu()
+    {
+       $menu = array(
+            'Etalase' => 'grid',
+            'Sedang Populer' => 'trending-up',
+            'Diskon' => 'dollar-sign'
+    );
+    return $menu;
+    }
 
+    function kategori()
+    {
+        $kategori = array(
+            'Pakaian' => 'package',
+            'Elektronik' => 'monitor',
+            'Gadget' => 'smartphone'
+    );
+    return $kategori;
+    }
     function idUser()
     {
         $this->db->select('right(user.id_user,2) as id_user', FALSE);
@@ -52,12 +70,18 @@ class Model_produk extends CI_Model{
             if(password_verify($password,$row['password']))
             {
                 $sess_array = array(
+                    'ID' => $row['id_user'],
                     'USER' => $row['username'],
                     'LEVEL' => $row['status_user'],
                     'login_status' => 'true',
                 );
                 $this->session->set_userdata($sess_array);
-                redirect('dashboard','refresh');
+                if($this->session->userdata('status_user') == '1')
+                    {
+                        redirect('dashboard','refresh');
+                    }else{
+                        redirect('profile','refresh');   
+                    }
         }else{
             redirect('login?m=false','refresh');
         } 

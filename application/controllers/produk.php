@@ -11,23 +11,12 @@ class produk extends CI_Controller {
 
 	public function index()
 	{
-        $nav = 'STORE MARKET SHOP';
-        $heading = 'Etalase';
+        $heading = "Etalase";
         $konten = $this->Model_produk->tampilProduk();
-
-
-        $menu = array(
-                'Etalase' => 'grid',
-                'Sedang Populer' => 'trending-up',
-                'Diskon' => 'dollar-sign'
-        );
-        $kategori = array(
-                'Pakaian' => 'package',
-                'Elektronik' => 'monitor',
-                'Gadget' => 'smartphone'
-        );
-
+        $menu = $this->Model_produk->menu();
+        $kategori = $this->Model_produk->kategori();
         
+
         
         $this->load->view('templates/head');
         $this->load->view('templates/topbar');
@@ -36,4 +25,6 @@ class produk extends CI_Controller {
         compact('heading','konten'));
         $this->load->view('templates/footer');
         }
+        
+        
 }
