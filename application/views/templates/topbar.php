@@ -11,8 +11,16 @@
   </ul> -->
   
   <div class="btn-group mx-2">
-            <button type="button" class="btn btn-sm btn-outline-secondary"><i data-feather="shopping-cart"> </i></button>
-            <button type="button" class="btn btn-sm btn-outline-secondary" disabled> <span class="badge badge-danger">4</span></button>
+            <a  href="<?=base_url()?>checkout" class="btn btn-sm btn-outline-secondary"><i data-feather="shopping-cart"></i></a>
+            <button type="button" class="btn btn-sm btn-outline-secondary" disabled> <span class="badge badge-danger">
+              <?php
+              $cart = 0;
+              foreach ($this->session->userdata('barang') as $key => $value) {
+                $cart+=$value;
+              }
+              echo $cart; ?>
+            
+            </span></button>
           </div>
 <?php
 

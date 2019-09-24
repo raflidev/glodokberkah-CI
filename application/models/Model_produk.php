@@ -107,5 +107,19 @@ class Model_produk extends CI_Model{
             echo 'tidak';
         }
     }
+
+    function tambahBarang($kodebarang)
+    {
+        $jmlh=1;
+        // $data = array(
+        //     'barang' => array(
+        //         $kodebarang => 0+$jmlh
+        //     )
+        // );
+        $_SESSION['barang'][$kodebarang]+=$jmlh;
+        // $this->session->set_userdata($data);
+        $this->session->set_flashdata('add_produk', 'produk sudah ditambahkan');
+        redirect('produk');
+    }
 }
 ?>

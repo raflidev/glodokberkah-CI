@@ -8,7 +8,7 @@ class produk extends CI_Controller {
         $this->load->database();
         $this->load->model('Model_produk');
         }
-
+        
 	public function index()
 	{
         $heading = "Etalase";
@@ -26,5 +26,11 @@ class produk extends CI_Controller {
         $this->load->view('templates/footer');
         }
         
+        public function add($kodebarang)
+        {
+        $this->Model_produk->tambahBarang($kodebarang);
+        
+        redirect('produk');
+        }
         
 }

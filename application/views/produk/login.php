@@ -4,7 +4,7 @@
     <main role="main" class="px-4 text-center">
         <div class="card mx-auto " style="width: 24rem;">
                 <div class="card-body">
-                    <h1 class="h2 mb-5"><?= $heading ?></h1>
+                    <h1 class="h2 mb-3"><?= $heading ?></h1>
                     <?php
                     if($pesan = $this->input->get('m', TRUE)){
                         if($pesan = "false"){?>
@@ -13,6 +13,11 @@
                             </div>
                         <?php }
                     }
+                    if($this->session->flashdata('login_dulu')){?>
+                        <div class="alert alert-danger " role="alert">
+                            <?= $this->session->flashdata('login_dulu') ?>
+                        </div>
+                    <?php }
                     ?>
                     <form action='<?= site_url('login/check') ?>' method='post'>
                     <label for="inputEmail" class="sr-only">Email address</label>
