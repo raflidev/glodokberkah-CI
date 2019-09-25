@@ -33,4 +33,33 @@ class produk extends CI_Controller {
         redirect('produk');
         }
         
+        public function delete($kodebarang)
+        {
+        $this->Model_produk->hapusBarang($kodebarang);
+        
+        redirect('checkout');
+        }
+        
+        public function checkout()
+        {
+        // alamat
+        $id = $this->input->post('id');
+        $provinsi = $this->input->post('provinsi');
+        $kota = $this->input->post('kota');
+        $kecamatan = $this->input->post('kecamatan');
+        $deskel = $this->input->post('deskel');
+        $pos = $this->input->post('pos');
+        $total = $this->input->post('total');
+        $paymentMethod = $this->input->post('paymentMethod');
+        
+        // verifikasi
+        $password = $this->input->post('password');
+
+        $resultinfo = $this->Model_produk->updateData($id,$provinsi,$kota,$kecamatan,$deskel,$pos,$password,$paymentMethod,$total);
+
+        if($resultinfo == "true"){
+                redirect('pembayaran');
+        }
+
+        }
 }

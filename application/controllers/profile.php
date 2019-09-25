@@ -28,10 +28,7 @@ class profile extends CI_Controller {
         $this->load->view('profile/data',compact('id','ca'));
     }
 
-    public function checkalamat()
-    {
-     
-    }
+
 
     public function checkdata()
     {

@@ -4,10 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-    <meta name="generator" content="Jekyll v3.8.5">
-    <title>Checkout example · Bootstrap</title>
+    <title>Checkout</title>
 
     <!-- Bootstrap core CSS -->
 
@@ -23,20 +20,35 @@
 
   <div class="row">
     <div class="col-md-4 order-md-2 mb-4">
+    <?php
+          if($this->session->flashdata('delete_produk')){?>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= $this->session->flashdata('delete_produk') ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <?php }
+          ?>
       <h4 class="d-flex justify-content-between align-items-center mb-3">
         <span class="text-muted">Your cart</span>
+       
         <span class="badge badge-secondary badge-pill">
         <?php
               $cart = 0;
+              if($this->session->userdata('barang')):
               foreach ($this->session->userdata('barang') as $key => $value) {
                 $cart+=$value;
               }
-              echo $cart; ?>
+            endif;
+            echo $cart; 
+            ?>
         </span>
       </h4>
       <ul class="list-group mb-3">
           <?php 
           $total=0;
+          if($this->session->userdata('barang')){
           foreach ($this->session->userdata('barang') as $key => $value):
             $query = $this->db->query("select * from barang inner join detailbarang on detailbarang.kode_barang = barang.kode_barang where barang.kode_barang = '$key' ");
             foreach($query->result_array() as $row):
@@ -48,41 +60,44 @@
             <small class="text-muted"><?= $value ?> pcs</small>
           </div>
           <span class="text-muted">Rp.<?= number_format($subharga) ?></span>
+          <small class="text-muted float-right pl-2"><a href="<?= base_url()?>/produk/delete/<?= $key ?>">x</a></small>
         </li>
 
           <?php 
         $total+=$subharga;
-        endforeach;
-      endforeach; 
-      ?>
+            endforeach;
+          endforeach;
+        }else{ ?>
+       <li class="list-group-item d-flex justify-content-between lh-condensed">
+          <div>
+            <h6 class="my-0">Keranjang kosong</h6>
+          </div>
+        <?php } ?>
+    
+        </li>
+      <form action='<?= site_url('produk/checkout') ?>' method='post'>
       <li class="list-group-item d-flex justify-content-between">
         <span>Total (IDR)</span>
-        <strong>Rp.<?= number_format($total) ?></strong>
+        <strong >Rp.<?= number_format($total) ?></strong>
+        <input type="hidden" value="<?= $total ?>" name="total">
       </li>
-        
       </ul>
-
-      <form class="card p-2">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Promo code">
-          <div class="input-group-append">
-            <button type="submit" class="btn btn-secondary">Redeem</button>
-          </div>
-        </div>
-      </form>
     </div>
     <div class="col-md-8 order-md-1">
       <h4 class="mb-3">Billing address</h4>
-      <form class="needs-validation" novalidate>
+      <!-- <form class="needs-validation" novalidate> -->
         <div class="row">
           <div class="col-md-6">
-            <label for="firstName">First name</label>
+            <label for="firstName">Nama lengkap</label>
             <input type="text" value="<?php
-        if($ca == true){ echo $id['nama']; }?>" class="form-control" id="firstName" placeholder="" value="" required>
+        if($ca == true){ echo $id['nama']; }?>" class="form-control" id="firstName" placeholder="" value="" required readonly>
             <div class="invalid-feedback">
               Valid first name is required.
             </div>
           </div>
+
+        <input type="hidden" value="<?php
+    if($ca == true){ echo $id['kode_alamat']; }?>" name='id' class="form-control" id="firstName" placeholder="" value="" required readonly>
           
           <div class="col-md-6 mb-3">
               <label for="username">Username</label>
@@ -91,7 +106,7 @@
                       <span class="input-group-text">@</span>
                     </div>
                     <input type="text" value="<?php
-        if($ca == true){ echo $this->session->userdata('USER'); }?>" class="form-control" id="username" placeholder="Username" required>
+        if($ca == true){ echo $this->session->userdata('USER'); }?>" class="form-control" name="username" placeholder="Username" required readonly>
                     <div class="invalid-feedback" style="width: 100%;">
               Your username is required.
             </div>
@@ -102,7 +117,7 @@
         <div class="mb-3">
           <label for="email">Email </label>
           <input type="email"  value="<?php
-        if($ca == true){ echo $id['email']; }?>"class="form-control" id="email" placeholder="you@example.com">
+        if($ca == true){ echo $id['email']; }?>"class="form-control" name="email" placeholder="you@example.com" readonly>
           <div class="invalid-feedback">
             Please enter a valid email address for shipping updates.
           </div>
@@ -143,6 +158,11 @@
                     <input type="number" value="<?php
         if($ca == true){ echo $id['kode_pos']; }?>"   name='pos' class="form-control mb-3" placeholder="Kode pos" required>
                 </div>
+
+                <div class="col-md-12">
+                        <label>Silakan konfirmasi password sebelum menyimpan data!</label>
+                        <input type="password" name='password' class="form-control mb-3" placeholder="Konfirmasi Password" required>
+                </div>
        
         </div>
         
@@ -152,16 +172,26 @@
 
         <div class="d-block my-3">
           <div class="custom-control custom-radio">
-            <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-            <label class="custom-control-label" for="credit">Alfamart</label>
+            <input  id='mandiri' value="MDR" name="paymentMethod" type="radio" class="custom-control-input" checked required>
+            <label class="custom-control-label" for="mandiri" >Transfer
+            <br>
+            <img src="<?=base_url()?>/assets/img/mandiri.png" width='200'>
+            </label>
           </div>
           <div class="custom-control custom-radio">
-            <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-            <label class="custom-control-label" for="debit">Gopay</label>
+            <input   id='gopay' name="paymentMethod" value="GPY" type="radio" class="custom-control-input" required>
+            <label class="custom-control-label" for="gopay">Gopay
+            <br>
+            <img src="<?=base_url()?>/assets/img/gopay.png" width='200'>
+            </label>
           </div>
           <div class="custom-control custom-radio">
-            <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
-            <label class="custom-control-label" for="paypal">Ovo</label>
+            <input id='ovo' value="OVO"
+            name="paymentMethod" type="radio" class="custom-control-input" required>
+            <label class="custom-control-label" for="ovo">Ovo
+            <br>
+            <img src="<?=base_url()?>/assets/img/ovo.png" width='200'>
+            </label>
           </div>
         </div>
    

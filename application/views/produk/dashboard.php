@@ -1,13 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1><?= $heading ?>, Hello <?= $this->session->userdata('USER'); ?></h1>
-    <a href="<?= site_url('login/logout') ?>">Logout</a>
-</body>
-</html>
+
+
+  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2"><?= $heading ?></h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+          
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
+      <div class="row">
+
+      <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">First</th>
+      <th scope="col">Last</th>
+      <th scope="col">Handle</th>
+    </tr>
+  </thead>
+  <tbody>
+  <?php foreach ($tampil as $row) {?>
+    <tr>
+      <th scope="row">1</th>
+      <td><?= $row['nama_barang'] ?></td>
+      <td>Otto</td>
+      <td>@mdo</td>
+    </tr>
+  <?php } ?>
+  </tbody>
+</table>
+          
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+
+<!-- End Content -->

@@ -35,7 +35,8 @@ class login extends CI_Controller {
         $this->session->unset_userdata('NAME');
         $this->session->unset_userdata('LEVEL');
         $this->session->unset_userdata('login_status');
-        $this->session->set_flashdata('notif','Anda diarahkan ke halaman Login');
-        redirect('login');
+        
+        $this->session->set_flashdata('logout','Anda berhasil logout');
+        redirect('produk');
     }
 }

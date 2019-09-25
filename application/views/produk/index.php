@@ -4,8 +4,9 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2"><?= $heading ?></h1>
         <?php
-           if($this->session->flashdata('add_produk')){?>
+           if($this->session->flashdata()){?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= $this->session->flashdata('logout') ?>
             <?= $this->session->flashdata('add_produk') ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>

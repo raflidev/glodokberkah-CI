@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="<?= base_url()?>assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url()?>assets/js/bootstrap.min.js">
     <script src="https://unpkg.com/feather-icons"></script>
-    <link rel="stylesheet" href="assets/css/sidebar.css">
+    <link rel="stylesheet" href="<?= base_url()?>assets/css/sidebar.css">
     <title>GlodokBerkah</title>
     <style>
       .bd-placeholder-img {
