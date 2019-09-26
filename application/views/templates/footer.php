@@ -7,4 +7,9 @@
         <script>
       feather.replace();
     </script>
+      <script type="text/javascript">
+          $(window).on('load',function(){
+              $('#myModal').modal('show');
+          });
+      </script>
 </html>

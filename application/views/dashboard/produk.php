@@ -3,6 +3,20 @@
   <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2"><?= $heading ?></h1>
+        <?php
+           if($this->session->flashdata()){?>
+          <div class="alert alert-success alert-dismissible fade show" role="alert">
+          Barang sudah <strong>
+            <?= $this->session->flashdata('check_yes') ?>
+            <?= $this->session->flashdata('hapus') ?>
+            <?= $this->session->flashdata('update') ?>
+          </strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <?php }
+          ?>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
           
@@ -14,7 +28,8 @@
         </div>
       </div>
       <div class="row">
-<?php if($heading == "Produk"){ ?>
+      <a class='btn btn-primary mb-2' href="<?= base_url() ?>dashboard/Produk/add/">Tambah produk</a>
+     
       <table class="table">
   <thead>
     <tr>
@@ -37,34 +52,15 @@
       <td><?= $row['merk'] ?></td>
       <td><?= $row['kategori'] ?></td>
       <td>
-      <a data-toggle="modal" data-target="#exampleModal" class='badge badge-primary' href="<?= base_url() ?>dashboard/Produk/detail/<?= $row['kode_barang'] ?>">Detail</a>
+      
+      <a class='badge badge-success' href="<?= base_url() ?>dashboard/Produk/edit/<?= $row['kode_barang'] ?>">Edit</a>
+      <a class='badge badge-danger'  onclick="return confirm('yakin akan dihapus?');" href="<?= base_url() ?>dashboard/Produk/hapus/<?= $row['kode_barang'] ?>">Detail</a>
       
       </td>
     </tr>
   <?php } ?>
   </tbody>
 </table>
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
-<?php } ?> 
         </div>
       </div>
     </main>

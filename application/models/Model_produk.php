@@ -61,6 +61,30 @@ class Model_produk extends CI_Model{
         return $kodetampil;
     }
 
+    function tampilkodebarang()
+    {
+        $this->db->select('right(detailbarang.kode_barang,2) as kode_barang', FALSE);
+        $this->db->order_by('kode_barang','DESC');
+        $this->db->limit(1);
+        $this->db->from('detailbarang');
+        $queryuser = $this->db->get();
+        
+        if($queryuser->num_rows() <> 0)
+        {
+            //cek code
+            $data = $queryuser->row();
+            $kode = intval($data->kode_barang) + 1;    
+        }
+        else
+        {
+            $kode =1;
+        }
+
+        $batas = str_pad($kode,2,"0", STR_PAD_LEFT);
+        $kodetampil = "K02B".$batas;
+        return $kodetampil;
+    }
+
     function tampilProduk()
     {
         $this->db->select('*');
@@ -241,6 +265,21 @@ class Model_produk extends CI_Model{
         $this->db->order_by('transaksi.kode_transaksi', 'DESC');
         $this->db->where('id_user',$this->session->userdata('ID'));
         return $this->db->get();
+    }
+
+    function insertBarang($kode,$nama,$merk,$kategori,$deskripsi)
+    {
+            
+            $data = array(
+                'kode_barang' => $kode,
+                'nama_barang' => $nama,
+                'merk' => $merk,
+                'kategori' => $kategori,
+                'deskripsi' => $deskripsi
+            );
+            
+            $this->db->insert('detailbarang', $data);
+            
     }
 
 }
