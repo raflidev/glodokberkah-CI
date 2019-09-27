@@ -12,8 +12,23 @@ class profile extends CI_Controller {
     
     public function index()
     {
-        $heading = "Profiles";
-        $this->load->view('profile/index',compact('heading'));
+        $heading = "Pembelian";
+        $menu = $this->Model_produk->menuProfile();
+
+        $this->db->distinct('detailtransaksi.kode_transaksi');
+        $this->db->select('detailtransaksi.kode_transaksi');
+        $this->db->from('transaksi');
+        $this->db->join('detailtransaksi', 'detailtransaksi.kode_transaksi = transaksi.kode_transaksi');
+        $this->db->where('transaksi.id_user', $this->session->userdata('ID'));
+        $this->db->order_by('detailtransaksi.kode_transaksi', "ASC");
+        $query = $this->db->get();
+        $tampil = $query->result_array();
+        
+        $this->load->view('templates/head');
+        $this->load->view('templates/topbar');
+        $this->load->view('templates/profile/sidebar', compact('heading','menu'));
+        $this->load->view('profile/profile',compact('heading','tampil'));
+        $this->load->view('templates/footer');
     }
 
     public function data()

@@ -16,6 +16,16 @@ class Model_produk extends CI_Model{
     return $menu;
     }
 
+    function menuProfile()
+    {
+        $menu = array(
+            'Pembelian' => 'trending-up',
+            'Edit' => 'grid',
+            'Logout' => 'dollar-sign'
+    );
+    return $menu;
+    }
+
 
     function kategori()
     {
