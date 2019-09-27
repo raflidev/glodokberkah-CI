@@ -4,11 +4,20 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2"><?= $heading ?></h1>
         <?php
-           if($this->session->flashdata()){?>
+          if($this->session->flashdata('lunas')){?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
           Barang <strong>
-            <?= $this->session->flashdata('bukti_null') ?>
             <?= $this->session->flashdata('lunas') ?>
+          </strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <?php }
+          if($this->session->flashdata('bukti_null')){?>
+          <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          Barang <strong>
+            <?= $this->session->flashdata('bukti_null') ?>
           </strong>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>

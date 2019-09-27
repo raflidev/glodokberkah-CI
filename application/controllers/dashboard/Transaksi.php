@@ -67,7 +67,7 @@ class Transaksi extends CI_Controller {
         $tampil = $query->row_array();
 
         if($tampil['bukti'] == NULL){
-            $this->session->set_flashdata('bukti_null', 'belum lunas');
+            $this->session->set_flashdata('bukti_null', 'belum dibayar');
             redirect('dashboard/Transaksi');
         }
         $this->load->view('templates/head');
@@ -82,8 +82,8 @@ class Transaksi extends CI_Controller {
         $DT = array(
             'dibayar' => "Y"
         );
-        $this->db->update('detailtransaksi',$DT);
         $this->db->where('kode_transaksi', $kode);
+        $this->db->update('detailtransaksi',$DT);
 
         $this->db->select('*');
         $this->db->from('transaksi');
@@ -100,7 +100,7 @@ class Transaksi extends CI_Controller {
             $query = $this->db->update('barang', $b);
         }
         $this->session->set_flashdata('lunas','sudah lunas!');
-        redirect('transaksi');
+        redirect('dashboard/transaksi');
 
         
     }
