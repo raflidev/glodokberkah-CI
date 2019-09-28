@@ -35,7 +35,7 @@
             <div class="py-5 text-center">
                 <img src="<?=base_url()?>assets/img/<?= $r['gambar'] ?>" width="200"><br>
                 Jumlah tagihan:
-                <h3 >Rp.<?= number_format($r['kode_unik']+$row['total_biaya']) ?></h3>
+                <h3 >Rp.<?= number_format($r['kode_unik']+$row['total_biaya']+$row['ongkir']) ?></h3>
                 Nomor Tagihan:
                 <h3 class='text-danger'><?= $r['rekening'] ?></h3>
             </div>

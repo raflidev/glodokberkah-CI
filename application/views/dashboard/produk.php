@@ -48,13 +48,17 @@
   foreach ($tampil as $row) {?>
     <tr>
       <th scope="row"><?= $no++ ?></th>
+      <?php if($row['stok'] > 0 ){?>
       <td><?= $row['nama_barang'] ?></td>
+      <?php }else{ ?>
+      <td><b ><?= $row['nama_barang'] ?> <i class='text-danger'>(stok barang habis)</i></b></td>
+        <?php } ?>
       <td><?= $row['merk'] ?></td>
       <td><?= $row['kategori'] ?></td>
       <td>
       
       <a class='badge badge-success' href="<?= base_url() ?>dashboard/Produk/edit/<?= $row['kode_barang'] ?>">Edit</a>
-      <a class='badge badge-danger'  onclick="return confirm('yakin akan dihapus?');" href="<?= base_url() ?>dashboard/Produk/hapus/<?= $row['kode_barang'] ?>">Detail</a>
+      <a class='badge badge-danger'  onclick="return confirm('yakin akan dihapus?');" href="<?= base_url() ?>dashboard/Produk/hapus/<?= $row['kode_barang'] ?>">Hapus</a>
       
       </td>
     </tr>

@@ -13,21 +13,21 @@
 
 if($this->session->userdata('LEVEL') == '1'){?>
 <div class="btn-group mx-2">
-          <a href='dashboard' class="btn btn-sm btn-outline-secondary">Dashboard</a>
-          <a href='login/logout' class="btn btn-sm btn-outline-secondary">Logout</a>
+          <a href='<?= base_url() ?>dashboard' class="btn btn-sm btn-outline-secondary">Dashboard</a>
+          <a href='<?= base_url() ?>login/logout' class="btn btn-sm btn-outline-secondary">Logout</a>
         </div>
 <?php
 }else if($this->session->userdata('LEVEL') == '2'){?>
   <div class="btn-group mx-2">
-            <a href='profile' class="btn btn-sm btn-outline-secondary">Profile</a>
-            <a href='login/logout' class="btn btn-sm btn-outline-secondary">Logout</a>
+            <a href='<?= base_url() ?>profile' class="btn btn-sm btn-outline-secondary">Profile</a>
+            <a href='<?= base_url() ?>login/logout' class="btn btn-sm btn-outline-secondary">Logout</a>
           </div>
   <?php
 
 } else {?>
 <div class="btn-group mx-2">
-          <a href='login' class="btn btn-sm btn-outline-secondary">Login</a>
-          <a href='register' class="btn btn-sm btn-outline-secondary">Register</a>
+          <a href='<?= base_url() ?>login' class="btn btn-sm btn-outline-secondary">Login</a>
+          <a href='<?= base_url() ?>register' class="btn btn-sm btn-outline-secondary">Register</a>
         </div>
 <?php
 }

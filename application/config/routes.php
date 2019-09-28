@@ -51,6 +51,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'produk';
 $route['dashboard/dashboard'] = 'dashboard';
-$route['profile/profile'] = 'profile';
+$route['profile'] = 'profile/profile';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;

@@ -19,6 +19,7 @@ class Model_produk extends CI_Model{
     function menuProfile()
     {
         $menu = array(
+            'Data' => 'grid',
             'Pembelian' => 'trending-up',
             'Edit' => 'grid',
             'Logout' => 'dollar-sign'

@@ -42,8 +42,12 @@
                 <label>Harga Jual</label>
                 <input type="text" name='harga_jual' value="<?= $row['harga_jual'] ?>" class="form-control" placeholder="Harga Jual"required >
             </div>
+            <div class="col-6">
+                <label>stok</label>
+                <input type="number" name='stok' value="<?= $row['stok'] ?>" class="form-control" placeholder="stok"required >
+            </div>
             
-            <div class="col-12">
+            <div class="col-6">
                 <label>Tanggal Produksi</label>
                 <input type="date" name='tgl' value="<?= $row['tgl_produksi'] ?>" class="form-control" placeholder="Tanggal Produksi"required >
             </div>

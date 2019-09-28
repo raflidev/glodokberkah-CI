@@ -50,7 +50,7 @@
   <tbody>
 
   <?php
-  
+  if($query->num_rows() > 0 ){
   $no =1;
   foreach ($tampil as $row) {?>
     <tr>
@@ -67,7 +67,11 @@
       
       </td>
     </tr>
-  <?php } ?>
+  <?php } }else{ ?>
+    <tr>
+    <td colspan='5' class='text-center'><b>Transaksi kosong!</b></td>
+    </tr>
+    <?php }?>
   </tbody>
 </table>
         </div>

@@ -29,7 +29,9 @@
         
         <?php
       foreach ($konten as $row ) {
-        ?>
+        
+
+          ?>
         <div class="col-md-4 mb-2">
           
           <div class="card" style="width: 18rem;">
@@ -38,11 +40,16 @@
                 <h5 class="card-title"><?= $row['nama_barang'] ?></h5>
                 <button type="button" class="float-right btn btn-secondary btn-sm mb-1 p-1" disabled><?= $row['kategori'] ?></button>
                 <p class='text-danger'>IDR <?= number_format($row['harga_jual']) ?></p>
+                <?php if($row['stok'] > 0){ ?>
                 <a href="<?= base_url() ?>produk/add/<?= $row['kode_barang'] ?>" class="btn btn-block  btn-primary">Buy Now! 
                   <span data-feather="shopping-cart"></span></a>
+                  <?php }else{ ?>
+                    <input href="<?= base_url() ?>produk/add/<?= $row['kode_barang'] ?>" class="btn btn-block  btn-secondary" value='Stok Habis!' disabled>
+                    <?php } ?>
                 </div>
               </div>
             </div>
+            
           <?php } ?>
           
         </div>

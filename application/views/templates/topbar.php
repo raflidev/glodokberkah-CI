@@ -9,7 +9,7 @@
       <a class="nav-link" href="#">Sign out</a>
     </li>
   </ul> -->
-  
+  <?php if($this->session->userdata('LEVEL') != '1'){?>
   <div class="btn-group mx-2">
             <a  href="<?=base_url()?>checkout" class="btn btn-sm btn-outline-secondary"><i data-feather="shopping-cart"></i></a>
             <button type="button" class="btn btn-sm btn-outline-secondary" disabled> <span class="badge badge-danger">
@@ -29,7 +29,7 @@
             </span></button>
           </div>
 <?php
-
+  }
 if($this->session->userdata('LEVEL') == '1'){?>
 <div class="btn-group mx-2">
           <a href='<?= base_url() ?>dashboard' class="btn btn-sm btn-outline-secondary">Dashboard</a>

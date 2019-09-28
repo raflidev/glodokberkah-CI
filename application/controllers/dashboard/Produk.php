@@ -60,8 +60,8 @@ class Produk extends CI_Controller {
                 $config['max_size'] = 1024;
                 $config['upload_path'] = 'assets/img/';
                 
-                $this->upload->initialize($config);
                 $this->load->library('upload', $config);
+                $this->upload->initialize($config);
 
                 if($this->upload->do_upload('gambar')){
                     $gambar = $this->upload->data('file_name');
@@ -124,6 +124,7 @@ class Produk extends CI_Controller {
     {
         //detail
         $kode = $this->input->post('kode');
+        $stok = $this->input->post('stok');
         $nama = $this->input->post('nama');
         $merk = $this->input->post('merk');
         $kategori = $this->input->post('kategori');
@@ -142,8 +143,8 @@ class Produk extends CI_Controller {
                 $config['max_size'] = 1024;
                 $config['upload_path'] = 'assets/img/';
                 
-                $this->upload->initialize($config);
                 $this->load->library('upload', $config);
+                $this->upload->initialize($config);
 
                 if($this->upload->do_upload('gambar')){
                     $gambar = $this->upload->data('file_name');

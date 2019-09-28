@@ -1,15 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="<?= base_url()?>assets/css/bootstrap.min.css">
-    <title>Data</title>
-</head>
-<body class='bg-white'>
-<main role="main" class="px-4 mt-4 ">
-        <div class="card mx-auto" style="width: 40rem;">
+
+ <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         
                 <div class="card-body">
                         <h3>Profile data</h3>
@@ -99,5 +90,3 @@
 </div>
         </div>
 </main>
-</body>
-</html>

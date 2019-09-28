@@ -22,7 +22,7 @@ class Transaksi extends CI_Controller {
 
         $this->load->view('templates/head');
         $this->load->view('templates/dashboard/topbar');
-        $this->load->view('dashboard/transaksi',compact('heading','tampil'));
+        $this->load->view('dashboard/transaksi',compact('heading','tampil','query'));
         $this->load->view('templates/dashboard/sidebar',compact('menu'));
         $this->load->view('templates/footer');
     }

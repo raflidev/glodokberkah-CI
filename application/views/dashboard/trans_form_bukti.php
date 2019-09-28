@@ -14,10 +14,15 @@
         </div>
       </div>
       <div class="row">
-        <img src="<?= base_url() ?>assets/img<?= $tampil['bukti'] ?>" width='800' alt="" srcset="">
-        <br>
-        <a class='btn btn-warning' onclick="return confirm('yakin sudah lunas?');" href="<?= base_url() ?>dashboard/Transaksi/lunas/<?= $tampilkode['kode_transaksi'] ?>">Lunas?</a>
+        <div class="col-6">
+        <img src="<?= base_url() ?>assets/img/pembayaran/<?= $tampil['bukti'] ?>" width='500' alt="" srcset="">
         </div>
+        <br>
+        </div>
+      </div>
+      <div class="mt-3">
+        <a class='btn btn-primary' target="_blank" href="<?= base_url() ?>assets/img/pembayaran/<?= $tampil['bukti'] ?>">Lihat lebih jelas</a>
+        <a class='btn btn-warning' onclick="return confirm('yakin sudah lunas?');" href="<?= base_url() ?>dashboard/Transaksi/lunas/<?= $tampilkode['kode_transaksi'] ?>">Lunas?</a>
       </div>
     </main>
   </div>
