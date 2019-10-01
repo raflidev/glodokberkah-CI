@@ -7,31 +7,37 @@
             <div class="btn-group mr-2">
         
         </div>
-        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-        </button>
         </div>
     </div>
     <?= form_open_multipart('dashboard/Produk/checkedit') ?>
 
         <div class="row">
 
-                <div class="col-3">
+                <div class="col-2">
                     <label>Kode Barang</label>
                     <input type="text" name='kode' value="<?= $kode ?>" class="form-control" required readonly>
                 </div>
-                <div class="col-9">
+                <div class="col-7">
                 <label>Nama Barang</label>
                 <input type="text" name='nama' value="<?= $row['nama_barang'] ?>" class="form-control" placeholder="Nama Barang" required >
             </div>
 
-            <div class="col-6">
+            <div class="col-3">
                 <label>Merk</label>
                 <input type="text" name='merk' value="<?= $row['merk'] ?>"class="form-control" placeholder="Merk" required >
             </div>
             <div class="col-6">
-                <label>Kategori</label>
+                <label>Kategori Utama</label>
+                <select name='kategori_utama' class="form-control">
+                    <option selected>Pilih salah satu...</option>
+                    <option>Elektronik</option>
+                    <option>Pakaian</option>
+                    <option>Gadget</option>
+                    <option>Aksesoris</option>
+                </select>
+            </div>
+            <div class="col-6">
+                <label>Sub Kategori</label>
                 <input type="text" name='kategori' value="<?= $row['kategori'] ?>" class="form-control" placeholder="Kategori"required >
             </div>
             <div class="col-6">

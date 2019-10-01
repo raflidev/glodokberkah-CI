@@ -56,9 +56,9 @@ class Model_profile extends CI_Model{
         $query = $this->db->get();
 
         if($query->num_rows() > 0){
-            return true;
+            return "true";
         }else{
-            return false;
+            return "false";
         }
 
     }
@@ -113,6 +113,8 @@ class Model_profile extends CI_Model{
                     $this->db->where('infouser.kode_alamat',$id);
                     $this->db->update('infouser');
                     
+                    $this->session->set_flashdata('profile', 'profile anda sudah diperbaharui');
+                    redirect('profile');
                 }
                 else
                 {
@@ -136,7 +138,13 @@ class Model_profile extends CI_Model{
                 );
                 $this->db->insert('alamat',$dataAlamat);
                 $this->db->insert('infouser',$dataProfil);
+
+                $this->session->set_flashdata('profile', 'profile anda sudah diperbaharui');
+                redirect('profile');
                 }
+            }else{
+                $this->session->set_flashdata('password', 'password anda sudah salah');
+                redirect('profile');
             }
         }
       

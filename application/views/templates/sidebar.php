@@ -9,11 +9,11 @@
             <?php
           foreach ($menu as $m => $icon) { ?>
           <li class="nav-item">
-            <?php if($heading == $m){ 
-             echo '<a class="nav-link active" href="#">';
-            } else { 
-           echo "<a class='nav-link' href='#'>";
-          } ?>
+            <?php if($heading == $m){?>
+             <a class="nav-link active" href="<?= base_url() ?>produk/<?= $m ?>">
+           <?php } else { ?>
+           <a class="nav-link" href="<?= base_url() ?>produk/<?= $m ?>">
+         <?php } ?>
               <span data-feather="<?= $icon ?>"></span>
               <?= $m ?> <span class="sr-only">(current)</span>
             </a>
@@ -37,10 +37,10 @@
           <?php
           foreach ($kategori as $k => $icon) { ?>
           <li class="nav-item">
-          <?php if($heading == $k){ 
-             echo "<a class='nav-link active' href='#'>";
-            } else { ?>
-            <a class="nav-link" href='#'>
+          <?php if($heading == $k){ ?>
+             <a class='nav-link active' href='<?= base_url() ?>produk/<?= $k ?>'>
+           <?php } else { ?>
+            <a class="nav-link" href='<?= base_url() ?>produk/<?= $k ?>'>
             <?php } ?>
               <span data-feather="<?= $icon ?>"></span>
               <?= $k ?> <span class="sr-only">(current)</span>

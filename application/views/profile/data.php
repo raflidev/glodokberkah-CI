@@ -1,10 +1,22 @@
 
  <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        
                 <div class="card-body">
+      <?php
+           if($this->session->flashdata()){?>
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <?= $this->session->flashdata('profile') ?>
+            <?= $this->session->flashdata('password') ?>
+            <?= $this->session->flashdata('alamat') ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <?php }
+
+          ?>
                         <h3>Profile data</h3>
-<form action='<?= site_url('profile/checkdata') ?>' method='post'>
+<form action='<?= site_url('profile/data/checkdata') ?>' method='post'>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                         <label >ID</label>
@@ -45,7 +57,7 @@
                     <div class="form-row">
                 <div class="form-group col-md-3">
                 <label >Kode</label>
-                <input type="text" name='id' value="<?= $id['kode_alamat'] ?>" class="form-control mb-3" placeholder="Username" required readonly>
+                <input type="text" name='id' value="<?php if($ca == "true"){ echo $id['kode_alamat']; }else{ echo $this->Model_profile->kodeAlamat(); } ?>" class="form-control mb-3" placeholder="Username" required readonly>
                 </div>
 
                 <div class="form-group col-md-9">

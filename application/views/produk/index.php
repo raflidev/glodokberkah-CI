@@ -5,39 +5,52 @@
         <h1 class="h2"><?= $heading ?></h1>
         <?php
            if($this->session->flashdata()){?>
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
             <?= $this->session->flashdata('logout') ?>
             <?= $this->session->flashdata('add_produk') ?>
+            <?= $this->session->flashdata('barang') ?>
+            <?= $this->session->flashdata('barang_kosong') ?>
+            <?= $this->session->flashdata('akses') ?>
+            <?= $this->session->flashdata('profile') ?>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <?php }
+
           ?>
         <div class="btn-toolbar mb-2 mb-md-0">
           <div class="btn-group mr-2">
           
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-          </button>
         </div>
       </div>
       <div class="row">
-
         
         <?php
-      foreach ($konten as $row ) {
-        
+        if(isset($query)){
+          if($query->num_rows() > 0 ){
 
-          ?>
+          }else{?>
+            <div class=" mx-auto text-center">Mohon maaf, barang <b><?= $this->input->get('q'); ?></b> tidak ditemukan</div>
+          <?php }
+        }
+        
+            foreach ($konten as $row ) {
+              
+              
+              ?>
         <div class="col-md-4 mb-2">
           
           <div class="card" style="width: 18rem;">
+          <a href="<?= base_url() ?>produk/detail/<?= $row['kode_barang'] ?>">
               <img src="<?=base_url()?>assets/img/<?= $row['gambar']?>" class="card-img-top" alt="...">
+              </a>
               <div class="card-body">
-                <h5 class="card-title"><?= $row['nama_barang'] ?></h5>
+                <h5 class="card-title">
+                <a class='text-dark' href="<?= base_url() ?>produk/detail/<?= $row['kode_barang'] ?>">
+                <?= $row['nama_barang'] ?></h5>
+                </a>
                 <button type="button" class="float-right btn btn-secondary btn-sm mb-1 p-1" disabled><?= $row['kategori'] ?></button>
                 <p class='text-danger'>IDR <?= number_format($row['harga_jual']) ?></p>
                 <?php if($row['stok'] > 0){ ?>
@@ -50,7 +63,8 @@
               </div>
             </div>
             
-          <?php } ?>
+          <?php } 
+          ?>
           
         </div>
       </div>

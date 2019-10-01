@@ -7,10 +7,16 @@ class dashboard extends CI_Controller {
     {
     parent::__construct();
     $this->load->model('Model_produk');
+    $this->load->library('session');
     }
 
     public function index()
     {
+        if($this->session->userdata("LEVEL") == "2")
+    {   
+        $this->session->set_flashdata('akses','tidak memiliki akses' );
+        redirect('produk');
+    }
         if(! $this->session->userdata('login_status'))
         {
             redirect('login');
@@ -25,6 +31,11 @@ class dashboard extends CI_Controller {
     }
     public function produk()
     {
+        if($this->session->userdata("LEVEL") == "2")
+        {   
+            $this->session->set_flashdata('akses','tidak memiliki akses' );
+            redirect('produk');
+        }
         $heading = 'Produk';
         $menu = $this->Model_produk->menuDashboard();
         $tampil = $this->Model_produk->tampilProduk();
@@ -36,6 +47,11 @@ class dashboard extends CI_Controller {
     }
     public function admin()
     {
+        if($this->session->userdata("LEVEL") == "2")
+        {   
+            $this->session->set_flashdata('akses','tidak memiliki akses' );
+            redirect('produk');
+        }
         $heading = 'Admin';
         $menu = $this->Model_produk->menuDashboard();
         $this->load->view('templates/head');
@@ -46,6 +62,11 @@ class dashboard extends CI_Controller {
     }
     public function transaksi()
     {
+        if($this->session->userdata("LEVEL") == "2")
+        {   
+            $this->session->set_flashdata('akses','tidak memiliki akses' );
+            redirect('produk');
+        }
         $this->load->model('Model_produk');
         $heading = 'Transaksi';
         $menu = $this->Model_produk->menuDashboard();

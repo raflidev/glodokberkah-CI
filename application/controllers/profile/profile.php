@@ -12,8 +12,21 @@ class profile extends CI_Controller {
     
     public function index()
     {
-        redirect('profile/Data');
-       
+        $heading = "Data";
+        $menu = $this->Model_produk->menuProfile();
+        $cekalamat = $this->Model_profile->checkAlamat();
+        if($cekalamat == true){
+            $id = $this->Model_profile->lihatData();
+        }else{
+            $id = $this->Model_profile->kodeAlamat();
+        }
+        $ca = $this->Model_profile->checkAlamat();
+
+        $this->load->view('templates/head');
+        $this->load->view('templates/dashboard/topbar');
+        $this->load->view('templates/profile/sidebar', compact('heading','menu'));
+        $this->load->view('profile/data',compact('id','ca'));
+        $this->load->view('templates/footer');
     }
     
 
@@ -31,14 +44,17 @@ class profile extends CI_Controller {
        
 
         $this->load->view('templates/head');
-        $this->load->view('templates/topbar');
+        $this->load->view('templates/dashboard/topbar');
         $this->load->view('templates/profile/sidebar', compact('heading','menu'));
         $this->load->view('profile/data',compact('id','ca'));
         $this->load->view('templates/footer');
     }
 
-
-
+    public function Logout()
+    {
+        redirect('login/logout');
+    }
+    
     public function checkdata()
     {
         

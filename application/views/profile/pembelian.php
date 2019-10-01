@@ -7,14 +7,10 @@
           <div class="btn-group mr-2">
           
           </div>
-          <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-          </button>
         </div>
       </div>
         <?php
-           if($this->session->flashdata()){?>
+          if($this->session->flashdata()){?>
           <div class="alert alert-success alert-dismissible fade show" role="alert">
             <?= $this->session->flashdata('bayar') ?>
             <?= $this->session->flashdata('fatal_error') ?>

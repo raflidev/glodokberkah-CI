@@ -10,8 +10,7 @@ class Model_produk extends CI_Model{
     {
        $menu = array(
             'Etalase' => 'grid',
-            'Sedang Populer' => 'trending-up',
-            'Diskon' => 'dollar-sign'
+            'Populer' => 'trending-up'
     );
     return $menu;
     }
@@ -19,10 +18,9 @@ class Model_produk extends CI_Model{
     function menuProfile()
     {
         $menu = array(
-            'Data' => 'grid',
-            'Pembelian' => 'trending-up',
-            'Edit' => 'grid',
-            'Logout' => 'dollar-sign'
+            'Data' => 'clipboard',
+            'Pembelian' => 'shopping-bag',
+            'Logout' => 'log-out'
     );
     return $menu;
     }
@@ -33,7 +31,8 @@ class Model_produk extends CI_Model{
         $kategori = array(
             'Pakaian' => 'package',
             'Elektronik' => 'monitor',
-            'Gadget' => 'smartphone'
+            'Gadget' => 'smartphone',
+            'Aksesoris' => 'watch'
     );
     return $kategori;
     }
@@ -42,8 +41,8 @@ class Model_produk extends CI_Model{
     function menuDashboard()
     {
         $menu = array(
-            'Produk' => 'grid',
-            'Admin' => 'trending-up',
+            'Produk' => 'archive',
+            'Admin' => 'user',
             'Transaksi' => 'dollar-sign'
     );
         return $menu;
@@ -101,6 +100,51 @@ class Model_produk extends CI_Model{
         $this->db->select('*');
         $this->db->from('detailbarang');
         $this->db->join('barang','barang.kode_barang=detailbarang.kode_barang');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function tampilProdukpakaian()
+    {
+        $this->db->select('*');
+        $this->db->from('detailbarang');
+        $this->db->join('barang','barang.kode_barang=detailbarang.kode_barang');
+        $this->db->like('detailbarang.kategori_utama' , 'pakaian');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function tampilProdukgadget()
+    {
+        $this->db->select('*');
+        $this->db->from('detailbarang');
+        $this->db->join('barang','barang.kode_barang=detailbarang.kode_barang');
+        $this->db->like('detailbarang.kategori_utama' , 'gadget');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function tampilProdukelektronik()
+    {
+        $this->db->select('*');
+        $this->db->from('detailbarang');
+        $this->db->join('barang','barang.kode_barang=detailbarang.kode_barang');
+        $this->db->like('detailbarang.kategori_utama' , 'elektronik');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function tampilProdukaksesoris()
+    {
+        $this->db->select('*');
+        $this->db->from('detailbarang');
+        $this->db->join('barang','barang.kode_barang=detailbarang.kode_barang');
+        $this->db->like('detailbarang.kategori_utama' , 'aksesoris');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    function tampilProdukpopuler()
+    {
+        $this->db->select('*');
+        $this->db->from('detailbarang');
+        $this->db->join('barang','barang.kode_barang=detailbarang.kode_barang');
+        $this->db->order_by('barang.terjual', "DESC");
         $query = $this->db->get();
         return $query->result_array();
     }
@@ -228,7 +272,12 @@ class Model_produk extends CI_Model{
                     
 
                 // transaksi
+                if($_SESSION['barang']){
                     $barang = $_SESSION['barang'];
+                    }else{
+                        $this->session->set_flashdata('barang_kosong','barang belum ada dikeranjang');
+                        redirect('produk');
+                    }
                     foreach ($barang as $b => $j) {
                         $data = array(
                             'kode_transaksi' => $kodetampil,
@@ -258,6 +307,9 @@ class Model_produk extends CI_Model{
                     }
                     
                 }           
+        }else{
+            $this->session->set_flashdata('password', 'Password anda salah, mohon ulangi');
+            redirect('checkout');
         }
         }
     }

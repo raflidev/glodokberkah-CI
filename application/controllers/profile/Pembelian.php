@@ -48,7 +48,7 @@ class Pembelian extends CI_Controller {
         $tampil = $query->result_array();
 
         $this->load->view('templates/head');
-        $this->load->view('templates/topbar');
+        $this->load->view('templates/dashboard/topbar');
         $this->load->view('profile/form_detail', compact('heading','tampil','kode','row'));
         $this->load->view('templates/profile/sidebar',compact('menu'));
         $this->load->view('templates/footer');

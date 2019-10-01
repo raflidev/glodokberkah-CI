@@ -1,7 +1,11 @@
-
+<?php $this->load->helper('form')?>
+  <?= form_open('produk/query', array('method'=>'get')); ?>
 <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="<?= base_url() ?>">Glodokberkah</a>
-  <input class="ml-2 p-3 form-control form-control-dark" type="text" placeholder="Search" aria-label="Search">
+  <a class="navbar-brand col-sm-3 col-md-2 mr-0" ' href="<?= base_url() ?>">Glodokberkah</a>
+  
+  <input class="ml-2 p-3 form-control form-control-dark" name='q' type="text" placeholder="Search" aria-label="Search">
+
+  <?= form_close(); ?>
   
   <!-- <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
@@ -16,7 +20,6 @@
               <?php
               $cart = 0;
               if($this->session->userdata('barang')){
-
                 foreach ($this->session->userdata('barang') as $key => $value) {
                   $cart+=$value;
                 }

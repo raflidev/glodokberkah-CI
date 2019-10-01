@@ -1,5 +1,11 @@
 
-
+<?php
+ if($this->session->userdata("LEVEL") == "2")
+ {   
+     $this->session->set_flashdata('akses','tidak memiliki akses' );
+     redirect('produk');
+ }
+?>
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2"><?= $heading ?></h1>
@@ -7,28 +13,34 @@
             <div class="btn-group mr-2">
         
         </div>
-        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
-            <span data-feather="calendar"></span>
-            This week
-        </button>
         </div>
     </div>
     <?= form_open_multipart('dashboard/Produk/check') ?>
 
         <div class="row">
 
-                <div class="col-3">
+                <div class="col-2">
                     <label>Kode Barang</label>
                     <input type="text" name='kode' value="<?= $kodebarang ?>" class="form-control" required readonly>
                 </div>
-                <div class="col-9">
+                <div class="col-7">
                 <label>Nama Barang</label>
                 <input type="text" name='nama' class="form-control" placeholder="Nama Barang" required >
             </div>
 
-            <div class="col-6">
+            <div class="col-3">
                 <label>Merk</label>
                 <input type="text" name='merk' class="form-control" placeholder="Merk" required >
+            </div>
+            <div class="col-6">
+                <label>Kategori Utama</label>
+                <select name='kategori_utama' class="form-control">
+                    <option selected>Pilih salah satu...</option>
+                    <option>Elektronik</option>
+                    <option>Pakaian</option>
+                    <option>Gadget</option>
+                    <option>Aksesoris</option>
+                </select>
             </div>
             <div class="col-6">
                 <label>Kategori</label>

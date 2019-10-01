@@ -36,6 +36,7 @@ class register extends CI_Controller {
         $pass2 = $this->input->post('password2');
         $result = $this->Model_produk->register($kode,$user,$pass,$pass2);
         
-        return $result;
+        $this->session->set_flashdata('profile', 'anda berhasil registrasi');
+        redirect('produk');
     }
 }

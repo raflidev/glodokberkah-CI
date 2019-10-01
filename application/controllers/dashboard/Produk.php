@@ -7,10 +7,16 @@ class Produk extends CI_Controller {
     {
     parent::__construct();
     $this->load->model('Model_produk');
+    $this->load->library('session');
     }
 
     public function index()
     {
+        if($this->session->userdata("LEVEL") == "2")
+        {   
+            $this->session->set_flashdata('akses','tidak memiliki akses' );
+            redirect('produk');
+        }
         $heading = 'Produk';
         $menu = $this->Model_produk->menuDashboard();
         $tampil = $this->Model_produk->tampilProduk();
@@ -23,6 +29,11 @@ class Produk extends CI_Controller {
 
     public function add()
     {
+        if($this->session->userdata("LEVEL") == "2")
+        {   
+            $this->session->set_flashdata('akses','tidak memiliki akses' );
+            redirect('produk');
+        }
         $this->load->helper('form');
         $heading = 'Produk';
         $menu = $this->Model_produk->menuDashboard();
@@ -42,6 +53,7 @@ class Produk extends CI_Controller {
         $kode = $this->input->post('kode');
         $nama = $this->input->post('nama');
         $merk = $this->input->post('merk');
+        $utama = $this->input->post('kategori_utama');
         $kategori = $this->input->post('kategori');
         $upload_gambar = $_FILES['gambar']['name'];
         $deskripsi = $this->input->post('deskripsi');
@@ -56,7 +68,7 @@ class Produk extends CI_Controller {
         // $ya = $this->Model_produk->insertBarang($kode,$nama,$merk,$kategori,$deskripsi);
             if($upload_gambar){
                 $this->load->helper('file'); 
-                $config['allowed_types'] = 'gif|jpg|png';
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
                 $config['max_size'] = 1024;
                 $config['upload_path'] = 'assets/img/';
                 
@@ -72,6 +84,7 @@ class Produk extends CI_Controller {
                     'gambar' => $gambar,
                     'kode_barang' => $kode,
                     'nama_barang' => $nama,
+                    'kategori_utama' => $utama,
                     'merk' => $merk,
                     'kategori' => $kategori,
                     'deskripsi' => $deskripsi
@@ -127,6 +140,7 @@ class Produk extends CI_Controller {
         $stok = $this->input->post('stok');
         $nama = $this->input->post('nama');
         $merk = $this->input->post('merk');
+        $utama = $this->input->post('kategori_utama');
         $kategori = $this->input->post('kategori');
         $upload_gambar = $_FILES['gambar']['name'];
         $deskripsi = $this->input->post('deskripsi');
@@ -160,6 +174,7 @@ class Produk extends CI_Controller {
                     $data = array(
                         'nama_barang' => $nama,
                         'merk' => $merk,
+                        'kategori_utama' => $utama,
                         'kategori' => $kategori,
                         'deskripsi' => $deskripsi
                     );
